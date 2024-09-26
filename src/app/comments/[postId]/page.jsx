@@ -20,6 +20,7 @@ const Comments = ({ params }) => {
   const [user] = useAuthState(auth);
   const [post, setPost] = useState(null); // State for post data
   const { postId } = params; // Get postId from the URL
+  const [username, setUsername] = useState("");
 
   // Fetch comments
   useEffect(() => {
@@ -83,6 +84,25 @@ const Comments = ({ params }) => {
     }
   };
 
+  // Fetch the username from Firestore when the user is logged in
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const userDoc = await getDoc(
+          doc(firestore, "posts", postId, "comments")
+        );
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setUsername(userData.username); // Set the username from Firestore
+        }
+      } catch (error) {
+        console.error("Error fetching username:", error);
+      }
+    };
+
+    fetchUsername();
+  }, [postId]);
+
   return (
     <div className="comments p-4 bg-gray-800 rounded-lg">
       {post ? (
@@ -93,22 +113,6 @@ const Comments = ({ params }) => {
       ) : (
         <p className="text-gray-400">Loading post...</p>
       )}
-
-      <h2 className="text-white mt-4">Comments</h2>
-      <div>
-        {comments.length > 0 ? (
-          comments.map((comment) => (
-            <div
-              key={comment.id}
-              className="comment p-2 mb-2 bg-gray-700 rounded"
-            >
-              <p className="text-white">{comment.text}</p>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-400">No comments yet.</p>
-        )}
-      </div>
       <textarea
         placeholder="Add a comment"
         value={newComment}
@@ -121,6 +125,24 @@ const Comments = ({ params }) => {
       >
         Submit Comment
       </button>
+
+      <h2 className="text-white mt-4">Comments</h2>
+      <div>
+        {comments.length > 0 ? (
+          comments.map((comment) => (
+            <div
+              key={comment.id}
+              className="comment p-2 mb-2 bg-gray-700 rounded"
+            >
+              <h2 className="text-white">Posted by: {username}</h2>
+
+              <p className="text-white">{comment.text}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-400">No comments yet.</p>
+        )}
+      </div>
     </div>
   );
 };

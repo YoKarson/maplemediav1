@@ -12,6 +12,7 @@ const Home = () => {
   const [user] = useAuthState(auth);
   const [username, setUsername] = useState(""); // State for storing username
   const router = useRouter();
+  const URL = `https://api.maplestory.gg/v2/public/character/gms/YoKarson`;
 
   // Fetch the username from Firestore when the user is logged in
   useEffect(() => {
@@ -37,6 +38,7 @@ const Home = () => {
     return null;
   }
 */
+
   return (
     <div className="w-96 min-h-screen bg-gray-900 text-white">
       <div className="p-4">
