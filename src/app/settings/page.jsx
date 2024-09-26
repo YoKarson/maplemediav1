@@ -13,6 +13,8 @@ const Settings = () => {
   const [gender, setGender] = useState("Not specified");
   const router = useRouter();
 
+  // xd
+
   // Ensure this only runs on the client side
   useEffect(() => {
     if (typeof window !== "undefined" && !user) {
