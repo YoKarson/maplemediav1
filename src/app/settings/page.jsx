@@ -13,16 +13,16 @@ const Settings = () => {
   const [gender, setGender] = useState("Not specified");
   const router = useRouter();
 
-  // Redirect to sign-in page if not logged in
+  // Ensure this only runs on the client side
   useEffect(() => {
-    if (!user) {
+    if (typeof window !== "undefined" && !user) {
       router.push("/signin");
     }
   }, [user, router]);
 
-  // Save changes to Firestore
+  // Save changes to Firestore (client-side only)
   const saveChanges = async () => {
-    if (user) {
+    if (user && typeof window !== "undefined") {
       try {
         await setDoc(doc(firestore, "users", user.uid), {
           username: username,
