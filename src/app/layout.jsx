@@ -16,7 +16,7 @@ const RootLayout = ({ children }) => {
               Amygos Media
             </button>
           </Link>
-          <div className="w-1/3">
+          <div className="w-1/3 ml-40">
             <input
               type="text"
               placeholder="Search..."
@@ -24,30 +24,40 @@ const RootLayout = ({ children }) => {
             />
           </div>
           <div className="flex items-center space-x-4">
+            <Link href="/createpost">
+              <button className="bg-green-500 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                Create Post
+              </button>
+            </Link>
+            <Link href="/signout">
+              <button className="bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                Logout
+              </button>
+            </Link>
             <div className="text-white">Profile Icon</div>
           </div>
         </nav>
 
-        <div class="flex flex-row justify-center">
+        <div className="flex flex-row justify-center">
           <nav className="bg-gradient-to-b from-gray-800 to-gray-900 w-64 min-h-screen p-6 fixed top-0 left-0 z-40 pt-16">
             <ul className="mt-12">
               <li>
                 <Link href="/">
-                  <button class="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
+                  <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
                     Home
                   </button>
                 </Link>
               </li>
               <li>
                 <Link href="/settings">
-                  <button class="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
+                  <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
                     Settings
                   </button>
                 </Link>
               </li>
             </ul>
           </nav>
-          <main class="justify-items-center ml-20">{children}</main>
+          <main className="justify-items-center ml-20">{children}</main>
         </div>
       </body>
     </html>

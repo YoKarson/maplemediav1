@@ -45,25 +45,6 @@ const Home = () => {
         <h1 className="text-3xl mb-4">
           Welcome, {username ? username : "No Username"}
         </h1>
-
-        <button
-          onClick={() => {
-            router.push("/createpost");
-          }}
-          className="bg-green-500 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-        >
-          Create Post
-        </button>
-
-        <button
-          onClick={() => {
-            signOut(auth);
-            router.push("/signin");
-          }}
-          className="bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-        >
-          Log Out
-        </button>
       </div>
 
       <Feed />

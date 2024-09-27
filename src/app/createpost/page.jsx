@@ -64,27 +64,34 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-800 rounded-lg">
-      <textarea
-        placeholder="Enter title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="w-full mb-2 p-2 bg-gray-700 text-white rounded"
-      />
-      <textarea
-        placeholder="Enter description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className="w-full mb-2 p-2 bg-gray-700 text-white rounded"
-      />
-      <input type="file" onChange={handleImageChange} />
-      <button
-        onClick={handleSubmit}
-        disabled={uploading}
-        className="bg-indigo-600 p-2 rounded text-white"
-      >
-        {uploading ? "Uploading..." : "Create Post"}
-      </button>
+    <div className="flex items-center justify-center min-h-screen mt-20 bg-gray-900 min-h-screen p-6 w-screen">
+      <div className="min-w-1/2">
+        <h1 className="text-white text-4xl font-serif">Create Your Own Post</h1>
+        <textarea
+          placeholder="Enter title (100 character limit)"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full mb-2 p-2 bg-gray-700 text-white rounded"
+        />
+        <textarea
+          placeholder="Enter description (400 character limit)"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full mb-2 p-2 bg-gray-700 text-white rounded"
+        />
+        <input
+          type="file"
+          onChange={handleImageChange}
+          className="text-white"
+        />
+        <button
+          onClick={handleSubmit}
+          disabled={uploading}
+          className="bg-indigo-600 p-2 rounded text-white"
+        >
+          {uploading ? "Uploading..." : "Create Post"}
+        </button>
+      </div>
     </div>
   );
 };

@@ -4,16 +4,20 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@firebase/config";
 import "@styles/globals.css";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const createAccount = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setEmail("");
       setPassword("");
+      // Optionally redirect after successful signup
+      router.push("/");
     } catch (error) {
       console.log("There was an error creating account");
       setEmail("");
@@ -49,27 +53,8 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gray-900">
-      {/* Top Navbar */}
-      <nav className="bg-gray-800 p-4 shadow-md">
-        <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold text-white">Maple Media</div>
-          <div className="space-x-4">
-            <Link href="/about">
-              <button className="text-gray-300 hover:text-white transition duration-200">
-                About Me
-              </button>
-            </Link>
-            <Link href="/contact">
-              <button className="text-gray-300 hover:text-white transition duration-200">
-                Contact
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-96">
+        <div className="bg-gray-800 p-10 rounded-lg shadow-xl ">
           <h1 className="text-white text-3xl font-semibold text-center mb-6">
             Sign Up
           </h1>
@@ -103,7 +88,7 @@ const SignUp = () => {
           </div>
           <hr className="my-6 border-gray-600" />
           <div className="text-gray-400 text-sm text-center">
-            <p>Or sign up with:</p>
+            <p>Or sign up with: (NOT WORKING ATM)</p>
             <div className="flex justify-center space-x-4 mt-2">
               <button className="flex items-center bg-white text-gray-800 rounded-lg p-2 hover:bg-gray-200 transition duration-200">
                 Google

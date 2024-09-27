@@ -39,8 +39,8 @@ const Settings = () => {
   };
 
   return user ? (
-    <div className="bg-gray-900 min-h-screen p-6">
-      <div className="w-full max-w-4xl mx-auto bg-gray-800 p-10 rounded-lg shadow-md">
+    <div className="flex items-center justify-center min-h-screen mt-20 bg-gray-900 min-h-screen p-6 w-screen">
+      <div className="bg-gray-800 p-10 rounded-lg shadow-md min-w-1/2">
         <h2 className="text-white text-2xl mb-6">User Settings</h2>
 
         <div className="mb-4">
