@@ -2,8 +2,8 @@ import "@styles/globals.css";
 import Link from "next/link";
 
 export const metadata = {
-  title: "MapleMedia",
-  description: "Share Your Accomplishments with The World",
+  title: "AmygosMedia",
+  description: "Share Whatever You Want With The Amygos Squad",
 };
 
 const RootLayout = ({ children }) => {
@@ -13,7 +13,7 @@ const RootLayout = ({ children }) => {
         <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50">
           <Link href="/">
             <button className="text-2xl font-bold text-white">
-              Maple Media
+              Amygos Media
             </button>
           </Link>
           <div className="w-1/3">
@@ -47,7 +47,7 @@ const RootLayout = ({ children }) => {
               </li>
             </ul>
           </nav>
-          <main class="justify-items-center ml-20 min-w-full">{children}</main>
+          <main class="justify-items-center ml-20">{children}</main>
         </div>
       </body>
     </html>

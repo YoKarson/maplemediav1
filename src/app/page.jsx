@@ -1,4 +1,5 @@
 "use client";
+import "@styles/globals.css";
 
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,6 +13,12 @@ const Home = () => {
   const [user] = useAuthState(auth);
   const [username, setUsername] = useState(""); // State for storing username
   const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/signin");
+    }
+  }, [user, router]);
 
   // Fetch the username from Firestore when the user is logged in
   useEffect(() => {
@@ -32,35 +39,30 @@ const Home = () => {
     fetchUsername();
   }, [user]);
 
-  /*
-  if (!user) {
-    router.push("/signin");
-    return null;
-  }
-*/
   return (
     <div className="mt-20 min-h-screen bg-gray-900 text-white">
-      <div className="flex justify-center p-4">
+      <div className="flex justify-center items-center p-4 space-x-4">
         <h1 className="text-3xl mb-4">
           Welcome, {username ? username : "No Username"}
         </h1>
-        <button
-          onClick={() => {
-            signOut(auth);
-            router.push("/signin");
-          }}
-          className="bg-blue-600 hover:bg-blue-700 p-2 rounded text-white transition duration-200"
-        >
-          Log Out
-        </button>
 
         <button
           onClick={() => {
             router.push("/createpost");
           }}
-          className="bg-green-600 hover:bg-green-700 p-2 rounded text-white transition duration-200"
+          className="bg-green-500 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105"
         >
           Create Post
+        </button>
+
+        <button
+          onClick={() => {
+            signOut(auth);
+            router.push("/signin");
+          }}
+          className="bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+        >
+          Log Out
         </button>
       </div>
 

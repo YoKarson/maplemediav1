@@ -14,4 +14,5 @@
 - MAYBES
 - add ability to post videos?
 
-- fix ui
+- things im realizing:
+  - like, dislike, and comment should just be a footer of each post

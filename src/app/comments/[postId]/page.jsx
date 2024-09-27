@@ -109,11 +109,18 @@ const Comments = ({ params }) => {
   }, [postId]);
 
   return (
-    <div className="comments p-4 bg-gray-800 rounded-lg">
+    <div className="comments p-4 bg-gray-800 rounded-lg mt-20">
       {post ? (
         <div className="post-details mb-4">
-          <h1 className="text-white text-lg">{post.title}</h1>
-          <p className="text-gray-400">{post.description}</p>
+          <p className="font-serif text-white text-6xl">{post.title}</p>
+          <p className="font-serif text-white text-3xl">{post.description}</p>
+          {post.imageUrl && (
+            <img
+              src={post.imageUrl}
+              className="mt-2 object-cover max-w-[500px] max-h-[500px]"
+              alt={post.title}
+            />
+          )}
         </div>
       ) : (
         <p className="text-gray-400">Loading post...</p>

@@ -129,11 +129,11 @@ const Feed = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center feed p-4">
+    <div className="flex flex-col items-center justify-center feed p-4 w-screen">
       {posts.map((post) => (
         <div
           key={post.id}
-          className="flex flex-col items-center min-w-1/2 post mb-4 bg-gray-800 p-4 rounded-lg"
+          className="flex flex-col items-center min-h-64  min-w-1/2 post mb-4 bg-gray-800 p-4 rounded-lg"
         >
           {/* Align "Posted by" to the left */}
           <p className="text-gray-400 text-left mb-2">
@@ -141,10 +141,9 @@ const Feed = () => {
           </p>
 
           {/* Post Title and Description */}
-          <h1 className="text-white text-lg">{post.title}</h1>
-          <p className="text-white">{post.description}</p>
+          <p className="font-serif text-white text-6xl">{post.title}</p>
+          <p className="font-serif text-white text-3x1">{post.description}</p>
 
-          {/* Post Image */}
           {post.imageUrl && (
             <img
               src={post.imageUrl}
@@ -153,13 +152,11 @@ const Feed = () => {
             />
           )}
 
-          {/* Likes, Dislikes, Comments */}
           <p className="text-white mt-2">
             Likes: {post.like || 0} Dislikes: {post.dislike || 0} Comments:{" "}
             {post.numOfComments}
           </p>
 
-          {/* Buttons in a row and styled better */}
           <div className="flex space-x-4 mt-2">
             <button
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded"
