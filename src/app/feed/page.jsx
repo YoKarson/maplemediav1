@@ -61,8 +61,6 @@ const Feed = () => {
     currentDislikes,
     userDislikes
   ) => {
-    console.log("This is the userLikes array: ", userLikes);
-
     if (userLikes.includes(user.uid)) {
       console.log("You have already liked this post.");
       return;
@@ -84,7 +82,7 @@ const Feed = () => {
       const postRef = doc(firestore, "posts", postId);
       await updateDoc(postRef, {
         like: currentLikes + 1,
-        userLikes: arrayUnion(user.uid), // Add user ID to userLikes array
+        userLikes: arrayUnion(user.uid),
       });
     } catch (error) {
       console.error("Error updating likes: ", error);
@@ -98,16 +96,11 @@ const Feed = () => {
     currentLikes,
     userLikes
   ) => {
-    console.log("This is the userDislikes array: ", userDislikes);
-
-    // checking if the userDislikes array has the current user already inside
     if (userDislikes.includes(user.uid)) {
       console.log("You have already disliked this post.");
       return;
     }
 
-    // if the current user is inside the userLike array
-    // then we need to remove them from it and decrement a like
     if (userLikes.includes(user.uid)) {
       try {
         const postRef = doc(firestore, "posts", postId);
@@ -120,7 +113,6 @@ const Feed = () => {
       }
     }
 
-    // increment dislike and add the current userid to userDislike array
     try {
       const postRef = doc(firestore, "posts", postId);
       await updateDoc(postRef, {
@@ -130,12 +122,10 @@ const Feed = () => {
     } catch (error) {
       console.error("Error updating dislikes: ", error);
     }
-
-    console.log("This is the userLikes array: ", userLikes);
   };
 
   const handleCommentButton = (postId) => {
-    router.push(`/comments/${postId}`); // Navigate to the comments page with postId
+    router.push(`/comments/${postId}`);
   };
 
   return (
@@ -145,43 +135,69 @@ const Feed = () => {
           key={post.id}
           className="flex flex-col items-center min-w-1/2 post mb-4 bg-gray-800 p-4 rounded-lg"
         >
-          <p className="text-gray-400">
+          {/* Align "Posted by" to the left */}
+          <p className="text-gray-400 text-left mb-2">
             Posted by: {usernames[post.userID] || "Loading..."}
           </p>
+
+          {/* Post Title and Description */}
           <h1 className="text-white text-lg">{post.title}</h1>
           <p className="text-white">{post.description}</p>
-          <img src={post.imageUrl} className="mt-2" alt={post.title} />
-          <p>
-            Likes: {post.like || 0} Dislikes: {post.dislike || 0} Comments:
+
+          {/* Post Image */}
+          {post.imageUrl && (
+            <img
+              src={post.imageUrl}
+              className="mt-2 object-cover max-w-[500px] max-h-[500px]"
+              alt={post.title}
+            />
+          )}
+
+          {/* Likes, Dislikes, Comments */}
+          <p className="text-white mt-2">
+            Likes: {post.like || 0} Dislikes: {post.dislike || 0} Comments:{" "}
             {post.numOfComments}
           </p>
-          <button
-            onClick={() =>
-              handleLikeButton(
-                post.id,
-                post.like,
-                post.userLikes || [],
-                post.dislike,
-                post.userDislikes || []
-              )
-            }
-          >
-            Like
-          </button>
-          <button
-            onClick={() =>
-              handleDislikeButton(
-                post.id,
-                post.dislike,
-                post.userDislikes || [],
-                post.like,
-                post.userLikes || []
-              )
-            }
-          >
-            Dislike
-          </button>
-          <button onClick={() => handleCommentButton(post.id)}>Comment</button>
+
+          {/* Buttons in a row and styled better */}
+          <div className="flex space-x-4 mt-2">
+            <button
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded"
+              onClick={() =>
+                handleLikeButton(
+                  post.id,
+                  post.like,
+                  post.userLikes || [],
+                  post.dislike,
+                  post.userDislikes || []
+                )
+              }
+            >
+              Like
+            </button>
+
+            <button
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-4 rounded"
+              onClick={() =>
+                handleDislikeButton(
+                  post.id,
+                  post.dislike,
+                  post.userDislikes || [],
+                  post.like,
+                  post.userLikes || []
+                )
+              }
+            >
+              Dislike
+            </button>
+
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
+              onClick={() => handleCommentButton(post.id)}
+            >
+              Comment
+            </button>
+          </div>
         </div>
       ))}
     </div>
