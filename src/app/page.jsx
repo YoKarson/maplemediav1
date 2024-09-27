@@ -12,7 +12,6 @@ const Home = () => {
   const [user] = useAuthState(auth);
   const [username, setUsername] = useState(""); // State for storing username
   const router = useRouter();
-  const URL = `https://api.maplestory.gg/v2/public/character/gms/YoKarson`;
 
   // Fetch the username from Firestore when the user is logged in
   useEffect(() => {
@@ -33,16 +32,18 @@ const Home = () => {
     fetchUsername();
   }, [user]);
 
-  /*if (!user) {
+  /*
+  if (!user) {
     router.push("/signin");
     return null;
   }
 */
-
   return (
-    <div className="w-96 min-h-screen bg-gray-900 text-white">
-      <div className="p-4">
-        <h1 className="text-3xl mb-4">Welcome, {username}</h1>
+    <div className="mt-20 min-h-screen bg-gray-900 text-white">
+      <div className="flex justify-center p-4">
+        <h1 className="text-3xl mb-4">
+          Welcome, {username ? username : "No Username"}
+        </h1>
         <button
           onClick={() => {
             signOut(auth);
@@ -63,7 +64,6 @@ const Home = () => {
         </button>
       </div>
 
-      {/* Feed */}
       <Feed />
     </div>
   );

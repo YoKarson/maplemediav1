@@ -9,9 +9,13 @@ export const metadata = {
 const RootLayout = ({ children }) => {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-gray-900">
         <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50">
-          <div className="text-2xl font-bold text-white">Maple Media</div>
+          <Link href="/">
+            <button className="text-2xl font-bold text-white">
+              Maple Media
+            </button>
+          </Link>
           <div className="w-1/3">
             <input
               type="text"
@@ -25,7 +29,6 @@ const RootLayout = ({ children }) => {
         </nav>
 
         <div class="flex flex-row justify-center">
-          {/* Side Nav Bar */}
           <nav className="bg-gradient-to-b from-gray-800 to-gray-900 w-64 min-h-screen p-6 fixed top-0 left-0 z-40 pt-16">
             <ul className="mt-12">
               <li>
@@ -44,11 +47,7 @@ const RootLayout = ({ children }) => {
               </li>
             </ul>
           </nav>
-
-          <div class="">
-            {/* Main Content Area */}
-            <main class="ml-20 mt-20">{children}</main>
-          </div>
+          <main class="justify-items-center ml-20 min-w-full">{children}</main>
         </div>
       </body>
     </html>

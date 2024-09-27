@@ -32,6 +32,7 @@ const Settings = () => {
         });
         console.log("User data updated successfully");
       } catch (error) {
+        alert(error);
         console.error("There was an error saving user data", error);
       }
     }

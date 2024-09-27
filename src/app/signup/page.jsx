@@ -11,14 +11,41 @@ const SignUp = () => {
 
   const createAccount = async () => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log({ res });
+      await createUserWithEmailAndPassword(auth, email, password);
       setEmail("");
       setPassword("");
     } catch (error) {
       console.log("There was an error creating account");
+      setEmail("");
+      setPassword("");
+      const errorCode = error.code;
+      const errorMsg = getErrorMessage(errorCode);
+      alert(errorMsg);
     }
   };
+
+  function getErrorMessage(errorCode) {
+    switch (errorCode) {
+      case "auth/invalid-email":
+        return "The email address is invalid. Please check and try again.";
+      case "auth/email-already-in-use":
+        return "This email is already in use. Please sign in or use a different email.";
+      case "auth/operation-not-allowed":
+        return "Email/password accounts are not enabled. Please contact support.";
+      case "auth/weak-password":
+        return "Your password is too weak. Please use a stronger password.";
+      case "auth/invalid-credential":
+        return "The supplied credential is invalid. It might have expired or is malformed.";
+      case "auth/wrong-password":
+        return "The password you entered is incorrect. Please try again.";
+      case "auth/user-mismatch":
+        return "The user attempting reauthentication does not match the current user.";
+      case "auth/operation-not-allowed":
+        return "This authentication method is not enabled. Please enable it in the Firebase console.";
+      default:
+        return "An error occurred. Please try again.";
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-900">

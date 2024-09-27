@@ -139,9 +139,12 @@ const Feed = () => {
   };
 
   return (
-    <div className="feed p-4">
+    <div className="flex flex-col items-center justify-center feed p-4">
       {posts.map((post) => (
-        <div key={post.id} className="post mb-4 bg-gray-800 p-4 rounded-lg">
+        <div
+          key={post.id}
+          className="flex flex-col items-center min-w-1/2 post mb-4 bg-gray-800 p-4 rounded-lg"
+        >
           <p className="text-gray-400">
             Posted by: {usernames[post.userID] || "Loading..."}
           </p>

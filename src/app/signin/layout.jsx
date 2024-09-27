@@ -6,11 +6,7 @@ export const metadata = {
 };
 
 const SignInLayout = ({ children }) => {
-  return (
-    <div className=" bg-gray-100 flex flex-col items-center justify-center min-h-screen">
-      <main>{children}</main>
-    </div>
-  );
+  return <main>{children}</main>;
 };
 
 export default SignInLayout;

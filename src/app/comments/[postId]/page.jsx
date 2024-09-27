@@ -60,7 +60,12 @@ const Comments = ({ params }) => {
 
     try {
       const postRef = doc(firestore, "posts", postId);
-      const userRef = doc(firestore, "users", userId);
+
+      // Ensure the user is authenticated before trying to access user.uid
+      if (!user) {
+        console.error("User is not authenticated");
+        return;
+      }
 
       // Safely access numOfComments and default to 0 if it's not defined
       const currentNumOfComments = post?.numOfComments || 0;
@@ -73,7 +78,7 @@ const Comments = ({ params }) => {
       // Add the new comment to the comments collection
       await addDoc(collection(firestore, "posts", postId, "comments"), {
         text: newComment,
-        userID: user.uid,
+        userID: user.uid, // Use user.uid as userId
         createdAt: serverTimestamp(),
       });
 
