@@ -57,6 +57,8 @@ const CreatePost = () => {
       setUserLike([]);
       setUserDislike([]);
       setNumOfComments(0);
+
+      alert("Post Created Successfully");
     } catch (error) {
       console.error("Error creating post: ", error);
       setUploading(false);

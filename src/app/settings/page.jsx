@@ -13,8 +13,6 @@ const Settings = () => {
   const [gender, setGender] = useState("Not specified");
   const router = useRouter();
 
-  // xd
-
   // Ensure this only runs on the client side
   useEffect(() => {
     if (typeof window !== "undefined" && !user) {
@@ -30,6 +28,8 @@ const Settings = () => {
           username: username,
           gender: gender,
         });
+        setUsername("");
+        alert("Changes Saved Successfully");
         console.log("User data updated successfully");
       } catch (error) {
         alert(error);
