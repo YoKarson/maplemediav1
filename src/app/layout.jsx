@@ -1,12 +1,14 @@
+"use client";
+
 import "@styles/globals.css";
 import Link from "next/link";
-
-export const metadata = {
-  title: "AmygosMedia",
-  description: "Share Whatever You Want With The Amygos Squad",
-};
+import { auth } from "@firebase/config";
+import { usePathname } from "next/navigation";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const RootLayout = ({ children }) => {
+  const [user] = useAuthState(auth);
+
   return (
     <html lang="en">
       <body className="bg-gray-900">
@@ -24,17 +26,35 @@ const RootLayout = ({ children }) => {
             />
           </div>
           <div className="flex items-center space-x-4">
-            <Link href="/createpost">
-              <button className="bg-green-500 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-                Create Post
-              </button>
-            </Link>
-            <Link href="/signout">
-              <button className="bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-                Logout
-              </button>
-            </Link>
-            <div className="text-white">Profile Icon</div>
+            {user && (
+              <>
+                <Link href="/createpost">
+                  <button className="bg-green-500 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                    Create Post
+                  </button>
+                </Link>
+                <Link href="/signout">
+                  <button className="bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                    Logout
+                  </button>
+                </Link>
+                <div className="text-white">Profile Icon</div>
+              </>
+            )}
+            {!user && (
+              <>
+                <Link href="/signin">
+                  <button className="bg-white-600 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                    Sign In
+                  </button>
+                </Link>
+                <Link href="/signup">
+                  <button className="bg-white-600 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                    Sign Up
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
         </nav>
 
@@ -48,13 +68,15 @@ const RootLayout = ({ children }) => {
                   </button>
                 </Link>
               </li>
-              <li>
-                <Link href="/settings">
-                  <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
-                    Settings
-                  </button>
-                </Link>
-              </li>
+              {user && (
+                <li>
+                  <Link href="/settings">
+                    <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
+                      Settings
+                    </button>
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
           <main className="justify-items-center ml-20">{children}</main>

@@ -31,15 +31,13 @@ const SignUp = () => {
   function getErrorMessage(errorCode) {
     switch (errorCode) {
       case "auth/invalid-email":
-        return "The email address is invalid. Please check and try again.";
-      case "auth/email-already-in-use":
+        return "Not a valid email address.";
+      case "auth/email-already-exists":
         return "This email is already in use. Please sign in or use a different email.";
       case "auth/operation-not-allowed":
         return "Email/password accounts are not enabled. Please contact support.";
       case "auth/weak-password":
         return "Your password is too weak. Please use a stronger password.";
-      case "auth/invalid-credential":
-        return "The supplied credential is invalid. It might have expired or is malformed.";
       case "auth/wrong-password":
         return "The password you entered is incorrect. Please try again.";
       case "auth/user-mismatch":
@@ -88,7 +86,7 @@ const SignUp = () => {
           </div>
           <hr className="my-6 border-gray-600" />
           <div className="text-gray-400 text-sm text-center">
-            <p>Or sign up with: (NOT WORKING ATM)</p>
+            <p>Or sign up with: (Coming Soon)</p>
             <div className="flex justify-center space-x-4 mt-2">
               <button className="flex items-center bg-white text-gray-800 rounded-lg p-2 hover:bg-gray-200 transition duration-200">
                 Google

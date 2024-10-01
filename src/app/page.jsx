@@ -14,12 +14,6 @@ const Home = () => {
   const [username, setUsername] = useState(""); // State for storing username
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user) {
-      router.push("/signin");
-    }
-  }, [user, router]);
-
   // Fetch the username from Firestore when the user is logged in
   useEffect(() => {
     const fetchUsername = async () => {
@@ -43,7 +37,7 @@ const Home = () => {
     <div className="mt-20 min-h-screen bg-gray-900 text-white">
       <div className="flex justify-center items-center p-4 space-x-4">
         <h1 className="text-3xl mb-4">
-          Welcome, {username ? username : "No Username"}
+          Welcome, {username ? username : "Anonmygo"}!
         </h1>
       </div>
 

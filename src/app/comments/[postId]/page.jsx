@@ -79,6 +79,7 @@ const Comments = ({ params }) => {
       await addDoc(collection(firestore, "posts", postId, "comments"), {
         text: newComment,
         userID: user.uid, // Use user.uid as userId
+        username: username || "Anonmygo",
         createdAt: serverTimestamp(),
       });
 
@@ -98,7 +99,7 @@ const Comments = ({ params }) => {
         );
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setUsername(userData.username); // Set the username from Firestore
+          setUsername(userData.username || "Anonmygo"); // Set the username from Firestore
         }
       } catch (error) {
         console.error("Error fetching username:", error);
@@ -146,13 +147,15 @@ const Comments = ({ params }) => {
               key={comment.id}
               className="comment p-2 mb-2 bg-gray-700 rounded"
             >
-              <h2 className="text-white">Posted by: {username}</h2>
+              <h2 className="text-gray-400">
+                Posted by: {username || "Anonmygo"}
+              </h2>
 
               <p className="text-white">{comment.text}</p>
             </div>
           ))
         ) : (
-          <p className="text-gray-400">No comments yet.</p>
+          <p className="text-gray-500">No comments yet.</p>
         )}
       </div>
     </div>

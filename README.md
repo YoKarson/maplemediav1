@@ -10,6 +10,7 @@
 - click profile icon => pulls up user about etc.
 - link twitch username
 - add ability to make emotes when posting/commenting
+- NOT SHOWING WHO IS POSTING THE COMMENTS
 
 - MAYBES
 - add ability to post videos?

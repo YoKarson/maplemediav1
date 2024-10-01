@@ -61,6 +61,11 @@ const Feed = () => {
     currentDislikes,
     userDislikes
   ) => {
+    if (!user) {
+      alert("Sorry, only logged in users can Like posts.");
+      return;
+    }
+
     if (userLikes.includes(user.uid)) {
       console.log("You have already liked this post.");
       return;
@@ -96,6 +101,11 @@ const Feed = () => {
     currentLikes,
     userLikes
   ) => {
+    if (!user) {
+      alert("Sorry, only logged in users can Dislike posts.");
+      return;
+    }
+
     if (userDislikes.includes(user.uid)) {
       console.log("You have already disliked this post.");
       return;
@@ -125,6 +135,11 @@ const Feed = () => {
   };
 
   const handleCommentButton = (postId) => {
+    if (!user) {
+      alert("Sorry, only logged in users can view/comment on posts.");
+      return;
+    }
+
     router.push(`/comments/${postId}`);
   };
 
@@ -137,7 +152,7 @@ const Feed = () => {
         >
           {/* Align "Posted by" to the left */}
           <p className="text-gray-400 text-left mb-2">
-            Posted by: {usernames[post.userID] || "Loading..."}
+            Posted by: {usernames[post.userID] || "Anonmygo"}
           </p>
 
           {/* Post Title and Description */}
