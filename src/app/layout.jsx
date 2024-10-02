@@ -3,11 +3,23 @@
 import "@styles/globals.css";
 import Link from "next/link";
 import { auth } from "@firebase/config";
-import { usePathname } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { sendEmailVerification } from "firebase/auth";
 
 const RootLayout = ({ children }) => {
   const [user] = useAuthState(auth);
+
+  const sendVerificationEmail = async () => {
+    if (user && !user.emailVerified) {
+      try {
+        await sendEmailVerification(auth.currentUser);
+        alert("Verification email sent! Please check your inbox.");
+      } catch (error) {
+        console.error("Error sending verification email:", error);
+        alert("Failed to send verification email.");
+      }
+    }
+  };
 
   return (
     <html lang="en">
@@ -25,9 +37,22 @@ const RootLayout = ({ children }) => {
               className="p-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-gray-500"
             />
           </div>
+
           <div className="flex items-center space-x-4">
             {user && (
               <>
+                {!user.emailVerified && (
+                  <>
+                    <h2 className="text-white">(Unverified User)</h2>
+                    <button
+                      onClick={sendVerificationEmail}
+                      className="bg-white-600 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+                    >
+                      Verify Here!
+                    </button>
+                  </>
+                )}
+
                 <Link href="/createpost">
                   <button className="bg-green-500 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
                     Create Post

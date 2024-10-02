@@ -3,7 +3,11 @@ import { useState } from "react";
 import { auth } from "@firebase/config";
 import { useRouter } from "next/navigation";
 import "@styles/globals.css";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import Link from "next/link";
 
 const SignIn = () => {
@@ -90,6 +94,11 @@ const SignIn = () => {
               <button className="text-indigo-400 hover:underline">
                 Sign Up Here
               </button>
+              <Link href="/resetpassword">
+                <button className="ml-5 text-indigo-400 hover:underline">
+                  Reset Password
+                </button>
+              </Link>
             </Link>
           </div>
           <hr className="my-6 border-gray-600" />

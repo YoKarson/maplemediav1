@@ -59,6 +59,7 @@ const CreatePost = () => {
       setNumOfComments(0);
 
       alert("Post Created Successfully");
+      Router.push("/");
     } catch (error) {
       console.error("Error creating post: ", error);
       setUploading(false);
