@@ -1,35 +1,29 @@
 "use client";
-
 import "@styles/globals.css";
 import Link from "next/link";
 import { auth } from "@firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useState } from "react";
 import { sendEmailVerification } from "firebase/auth";
 
 const RootLayout = ({ children }) => {
   const [user] = useAuthState(auth);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const sendVerificationEmail = async () => {
-    if (user && !user.emailVerified) {
-      try {
-        await sendEmailVerification(auth.currentUser);
-        alert("Verification email sent! Please check your inbox.");
-      } catch (error) {
-        console.error("Error sending verification email:", error);
-        alert("Failed to send verification email.");
-      }
-    }
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
   return (
     <html lang="en">
       <body className="bg-gray-900">
+        {/* Top Navigation Bar */}
         <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50">
+          {/* Site Name */}
           <Link href="/">
-            <button className="text-2xl font-bold text-white">
-              Amygos Media
-            </button>
+            <button className="text-2xl font-bold text-white">Amygos</button>
           </Link>
+          {/* Search Bar */}
           <div className="w-1/3 ml-40">
             <input
               type="text"
@@ -37,44 +31,66 @@ const RootLayout = ({ children }) => {
               className="p-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-gray-500"
             />
           </div>
-
+          {/* Right Side of Top Nav */}
           <div className="flex items-center space-x-4">
             {user && (
               <>
-                {!user.emailVerified && (
-                  <>
-                    <h2 className="text-white">(Unverified User)</h2>
-                    <button
-                      onClick={sendVerificationEmail}
-                      className="bg-white-600 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-                    >
-                      Verify Here!
-                    </button>
-                  </>
-                )}
-
+                {/* Create Post Button */}
                 <Link href="/createpost">
-                  <button className="bg-green-500 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                  <button className="bg-green-600 p-3 rounded-lg text-white font-semibold">
                     Create Post
                   </button>
                 </Link>
+
+                {/* Logout Button */}
                 <Link href="/signout">
-                  <button className="bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                  <button className="bg-red-600 p-3 rounded-lg text-white font-semibold">
                     Logout
                   </button>
                 </Link>
-                <div className="text-white">Profile Icon</div>
+
+                {/* Profile Dropdown */}
+                <div className="relative">
+                  <div
+                    className="cursor-pointer text-white"
+                    onClick={toggleDropdown}
+                  >
+                    Profile Icon
+                  </div>
+
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+                      <Link href="/yourposts">
+                        <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          View Your Posts
+                        </button>
+                      </Link>
+                      <Link href="/settings">
+                        <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Settings
+                        </button>
+                      </Link>
+                      <Link href="/signout">
+                        <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Logout
+                        </button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </>
             )}
+
+            {/* Sign In/Sign Up for non-logged-in users */}
             {!user && (
               <>
                 <Link href="/signin">
-                  <button className="bg-white-600 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                  <button className="bg-green-600 p-3 rounded-lg text-white font-semibold">
                     Sign In
                   </button>
                 </Link>
                 <Link href="/signup">
-                  <button className="bg-white-600 hover:bg-green-600 p-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                  <button className="bg-green-600 p-3 rounded-lg text-white font-semibold">
                     Sign Up
                   </button>
                 </Link>
@@ -83,6 +99,7 @@ const RootLayout = ({ children }) => {
           </div>
         </nav>
 
+        {/* Left Side Navigation Bar */}
         <div className="flex flex-row justify-center">
           <nav className="bg-gradient-to-b from-gray-800 to-gray-900 w-64 min-h-screen p-6 fixed top-0 left-0 z-40 pt-16">
             <ul className="mt-12">
@@ -94,16 +111,27 @@ const RootLayout = ({ children }) => {
                 </Link>
               </li>
               {user && (
-                <li>
-                  <Link href="/settings">
-                    <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
-                      Settings
-                    </button>
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    <Link href="/yourposts">
+                      <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
+                        Your Posts
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/settings">
+                      <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
+                        Settings
+                      </button>
+                    </Link>
+                  </li>
+                </>
               )}
             </ul>
           </nav>
+
+          {/* Main Content */}
           <main className="justify-items-center ml-20">{children}</main>
         </div>
       </body>

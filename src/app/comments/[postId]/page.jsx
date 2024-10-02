@@ -110,9 +110,12 @@ const Comments = ({ params }) => {
   }, [postId]);
 
   return (
-    <div className="comments p-4 bg-gray-800 rounded-lg mt-20">
+    <div className="comments p-4 bg-gray-800 rounded-lg mt-40">
       {post ? (
         <div className="post-details mb-4">
+          <p className="font-serif text-white">
+            Posted by: {post.username || "Anonmygo"}
+          </p>
           <p className="font-serif text-white text-6xl">{post.title}</p>
           <p className="font-serif text-white text-3xl">{post.description}</p>
           {post.imageUrl && (

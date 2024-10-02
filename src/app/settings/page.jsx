@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@firebase/config";
 import { useRouter } from "next/navigation";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, deleteDoc } from "firebase/firestore";
 import { firestore } from "@firebase/config";
+import { deleteUser } from "firebase/auth";
 
 const Settings = () => {
   const [user] = useAuthState(auth);
@@ -13,14 +14,12 @@ const Settings = () => {
   const [gender, setGender] = useState("Not specified");
   const router = useRouter();
 
-  // Ensure this only runs on the client side
   useEffect(() => {
     if (typeof window !== "undefined" && !user) {
       router.push("/signin");
     }
   }, [user, router]);
 
-  // Save changes to Firestore (client-side only)
   const saveChanges = async () => {
     if (user && typeof window !== "undefined") {
       try {
@@ -38,8 +37,26 @@ const Settings = () => {
     }
   };
 
+  const deleteAccount = async () => {
+    if (user) {
+      try {
+        // Delete user data from Firestore
+        await deleteDoc(doc(firestore, "users", user.uid));
+        // Delete user account from Firebase Authentication
+        await deleteUser(user);
+        alert("Account deleted successfully");
+        router.push("/signup");
+      } catch (error) {
+        console.error("Error deleting account:", error);
+        alert(
+          "Failed to delete account. You may need to sign in again to perform this action."
+        );
+      }
+    }
+  };
+
   return user ? (
-    <div className="flex items-center justify-center min-h-screen mt-20 bg-gray-900 min-h-screen p-6 w-screen">
+    <div className="flex items-center justify-center min-h-screen mt-20 bg-gray-900 min-h-screen p-6">
       <div className="bg-gray-800 p-10 rounded-lg shadow-md min-w-1/2">
         <h2 className="text-white text-2xl mb-6">User Settings</h2>
 
@@ -79,6 +96,12 @@ const Settings = () => {
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
         >
           Save Changes
+        </button>
+        <button
+          onClick={deleteAccount}
+          className="ml-96 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Delete Account
         </button>
       </div>
     </div>
