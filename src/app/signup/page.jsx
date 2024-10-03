@@ -52,48 +52,81 @@ const SignUp = () => {
   return (
     <div className="min-h-screen bg-gray-900">
       <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-gray-800 p-10 rounded-lg shadow-xl ">
-          <h1 className="text-white text-3xl font-semibold text-center mb-6">
-            Sign Up
-          </h1>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-3 mb-4 bg-gray-700 rounded-lg text-white placeholder-gray-400 transition duration-200 focus:outline-none focus:ring focus:ring-indigo-500"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 mb-4 bg-gray-700 rounded-lg text-white placeholder-gray-400 transition duration-200 focus:outline-none focus:ring focus:ring-indigo-500"
-          />
-          <button
-            onClick={createAccount}
-            className="w-full p-3 bg-indigo-600 rounded-lg text-white font-semibold hover:bg-indigo-500 transition duration-200"
-          >
-            Sign Up
-          </button>
-          <div className="text-white text-center mt-4">
-            <p>Already have an account? </p>
-            <Link href="/signin">
-              <button className="text-indigo-400 hover:underline">
-                Sign In Here
-              </button>
-            </Link>
+        <div className="flex space-x-4">
+          {/* Sign Up Box */}
+          <div className="bg-gray-800 p-10 rounded-lg shadow-xl">
+            <h1 className="text-white text-3xl font-semibold text-center mb-6">
+              Sign Up
+            </h1>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-3 mb-4 bg-gray-700 rounded-lg text-white placeholder-gray-400 transition duration-200 focus:outline-none focus:ring focus:ring-indigo-500"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 mb-4 bg-gray-700 rounded-lg text-white placeholder-gray-400 transition duration-200 focus:outline-none focus:ring focus:ring-indigo-500"
+            />
+            <button
+              onClick={createAccount}
+              className="w-full p-3 bg-indigo-600 rounded-lg text-white font-semibold hover:bg-indigo-500 transition duration-200"
+            >
+              Sign Up
+            </button>
+            <div className="text-white text-center mt-4">
+              <p>Already have an account? </p>
+              <Link href="/signin">
+                <button className="text-indigo-400 hover:underline">
+                  Sign In Here
+                </button>
+              </Link>
+            </div>
+            <hr className="my-6 border-gray-600" />
+            <div className="text-gray-400 text-sm text-center">
+              <p>Or sign up with: (Coming Soon)</p>
+              <div className="flex justify-center space-x-4 mt-2">
+                <button className="flex items-center bg-white text-gray-800 rounded-lg p-2 hover:bg-gray-200 transition duration-200">
+                  Google
+                </button>
+                <button className="flex items-center bg-white text-gray-800 rounded-lg p-2 hover:bg-gray-200 transition duration-200">
+                  Facebook
+                </button>
+              </div>
+            </div>
           </div>
-          <hr className="my-6 border-gray-600" />
-          <div className="text-gray-400 text-sm text-center">
-            <p>Or sign up with: (Coming Soon)</p>
-            <div className="flex justify-center space-x-4 mt-2">
-              <button className="flex items-center bg-white text-gray-800 rounded-lg p-2 hover:bg-gray-200 transition duration-200">
-                Google
-              </button>
-              <button className="flex items-center bg-white text-gray-800 rounded-lg p-2 hover:bg-gray-200 transition duration-200">
-                Facebook
-              </button>
+
+          {/* New Box 1 (Top) */}
+          <div className="flex flex-col">
+            <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-64 ml-20">
+              <h2 className="text-white text-2xl font-semibold mb-4">
+                Top Box
+              </h2>
+              {/* Add your content or images here */}
+              <img
+                src="your-image-url-here"
+                alt="Description"
+                className="mb-4"
+              />
+              <p className="text-gray-400">Some additional information.</p>
+            </div>
+
+            {/* New Box 2 (Bottom) */}
+            <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-64 mt-20 ml-20">
+              <h2 className="text-white text-2xl font-semibold mb-4">
+                Bottom Box
+              </h2>
+              {/* Add your content or images here */}
+              <img
+                src="your-image-url-here"
+                alt="Description"
+                className="mb-4"
+              />
+              <p className="text-gray-400">Some more information.</p>
             </div>
           </div>
         </div>

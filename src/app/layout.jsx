@@ -5,6 +5,7 @@ import { auth } from "@firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
 import { sendEmailVerification } from "firebase/auth";
+import Image from "next/image";
 
 const RootLayout = ({ children }) => {
   const [user] = useAuthState(auth);
@@ -23,8 +24,10 @@ const RootLayout = ({ children }) => {
           <Link href="/">
             <button className="text-2xl font-bold text-white">Amygos</button>
           </Link>
+
+          <h1>Amy live tracker goes here</h1>
           {/* Search Bar */}
-          <div className="w-1/3 ml-40">
+          <div className="w-1/3 mr-60">
             <input
               type="text"
               placeholder="Search..."
@@ -37,14 +40,14 @@ const RootLayout = ({ children }) => {
               <>
                 {/* Create Post Button */}
                 <Link href="/createpost">
-                  <button className="bg-green-600 p-3 rounded-lg text-white font-semibold">
+                  <button className="bg-pink-300 p-3 rounded-lg text-white font-semibold">
                     Create Post
                   </button>
                 </Link>
 
                 {/* Logout Button */}
                 <Link href="/signout">
-                  <button className="bg-red-600 p-3 rounded-lg text-white font-semibold">
+                  <button className="bg-purple-600 p-3 rounded-lg text-white font-semibold">
                     Logout
                   </button>
                 </Link>
@@ -128,6 +131,17 @@ const RootLayout = ({ children }) => {
                   </li>
                 </>
               )}
+
+              <li>
+                <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
+                  Visit Merch Store
+                </button>
+              </li>
+              <li>
+                <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
+                  Join The Discord
+                </button>
+              </li>
             </ul>
           </nav>
 

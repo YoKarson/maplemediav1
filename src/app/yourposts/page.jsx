@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@firebase/config";
+import Image from "next/image";
 
 const YourPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -54,44 +55,54 @@ const YourPosts = () => {
 
   return (
     <div className="flex flex-col items-center justify-center feed p-4 w-screen">
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          className="mt-40 flex flex-col items-center min-h-64 min-w-1/2 post mb-4 bg-gray-800 p-4 rounded-lg"
-        >
-          <p className="font-serif text-white text-6xl">{post.title}</p>
-          <p className="font-serif text-white text-3x1">{post.description}</p>
+      {posts.length === 0 ? (
+        <h1 className="text-white mt-20 text-4xl">You Have No Posts</h1>
+      ) : (
+        posts.map((post) => (
+          <div
+            key={post.id}
+            className="mt-40 flex flex-col items-center min-h-64 min-w-1/2 post mb-4 bg-gray-800 p-4 rounded-lg"
+          >
+            <p className="font-serif text-white text-6xl">{post.title}</p>
+            <p className="font-serif text-white text-3x1">{post.description}</p>
 
-          {post.imageUrl && (
-            <img
-              src={post.imageUrl}
-              className="mt-2 object-cover max-w-[500px] max-h-[500px]"
-              alt={post.title}
-            />
-          )}
+            {post.imageUrl && (
+              <img
+                src={post.imageUrl}
+                className="mt-2 object-cover max-w-[500px] max-h-[500px]"
+                alt={post.title}
+              />
+            )}
+            {/* Display likes and dislikes count */}
+            <div className="text-white mt-2">
+              <p>
+                <Image
+                  src="/images/thumb-up.png"
+                  alt=""
+                  width={200}
+                  height={200}
+                />
+                : {post.likes || 0} 👎: {post.dislikes || 0}
+              </p>
+            </div>
 
-          {/* Display likes and dislikes count */}
-          <div className="text-white mt-2">
-            <p>👍 Likes: {post.likes || 0}</p>
-            <p>👎 Dislikes: {post.dislikes || 0}</p>
+            <div className="flex space-x-4 mt-2">
+              <button
+                onClick={() => handleCommentButton(post.id)}
+                className="bg-green-500 text-white px-4 py-2 rounded"
+              >
+                View Your Post
+              </button>
+              <button
+                onClick={() => handleDeletePost(post.id)}
+                className="bg-red-500 text-white px-4 py-2 rounded"
+              >
+                Delete Post
+              </button>
+            </div>
           </div>
-
-          <div className="flex space-x-4 mt-2">
-            <button
-              onClick={() => handleCommentButton(post.id)}
-              className="bg-green-500 text-white px-4 py-2 rounded"
-            >
-              Comments
-            </button>
-            <button
-              onClick={() => handleDeletePost(post.id)}
-              className="bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Delete Post
-            </button>
-          </div>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 };

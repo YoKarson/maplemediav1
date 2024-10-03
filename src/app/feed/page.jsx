@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@firebase/config";
+import Image from "next/image";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -167,48 +168,67 @@ const Feed = () => {
             />
           )}
 
-          <p className="text-white mt-2">
-            Likes: {post.like || 0} Dislikes: {post.dislike || 0} Comments:{" "}
-            {post.numOfComments}
-          </p>
+          <div className="flex flex-row space-between">
+            <div className="flex space-x-4 mt-2">
+              <button
+                onClick={() =>
+                  handleLikeButton(
+                    post.id,
+                    post.like,
+                    post.userLikes || [],
+                    post.dislike,
+                    post.userDislikes || []
+                  )
+                }
+                className="flex items-center space-x-2" // Add flex and space between
+              >
+                <Image
+                  src="/images/SuperAmyyLove_sticker.png"
+                  alt="Thumbs Up"
+                  width={40}
+                  height={40}
+                />
+                <span>{post.like || 0}</span> {/* Wrap the count in a span */}
+              </button>
 
-          <div className="flex space-x-4 mt-2">
-            <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded"
-              onClick={() =>
-                handleLikeButton(
-                  post.id,
-                  post.like,
-                  post.userLikes || [],
-                  post.dislike,
-                  post.userDislikes || []
-                )
-              }
-            >
-              Like
-            </button>
+              <button
+                onClick={() =>
+                  handleDislikeButton(
+                    post.id,
+                    post.dislike,
+                    post.userDislikes || [],
+                    post.like,
+                    post.userLikes || []
+                  )
+                }
+                className="flex items-center space-x-2" // Add flex and space between
+              >
+                <Image
+                  src="/images/SuperAmyy_Reee320.png"
+                  alt="Thumbs Up"
+                  width={40}
+                  height={40}
+                />
+                <span>{post.dislike || 0}</span>{" "}
+                {/* Wrap the count in a span */}
+              </button>
 
-            <button
-              className="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-4 rounded"
-              onClick={() =>
-                handleDislikeButton(
-                  post.id,
-                  post.dislike,
-                  post.userDislikes || [],
-                  post.like,
-                  post.userLikes || []
-                )
-              }
-            >
-              Dislike
-            </button>
-
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
-              onClick={() => handleCommentButton(post.id)}
-            >
-              Comment
-            </button>
+              <button
+                onClick={() => handleCommentButton(post.id)}
+                className="flex items-center space-x-2"
+              >
+                {" "}
+                {/* Add flex and space between */}
+                <Image
+                  src="/images/Comments.png"
+                  alt="Thumbs Up"
+                  width={40}
+                  height={40}
+                />
+                <span>{post.numOfComments}</span>{" "}
+                {/* Wrap the count in a span */}
+              </button>
+            </div>
           </div>
         </div>
       ))}

@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@firebase/config";
+import Image from "next/image";
 
 const Comments = ({ params }) => {
   const [comments, setComments] = useState([]);
