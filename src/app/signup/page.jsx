@@ -5,6 +5,7 @@ import { auth } from "@firebase/config";
 import "@styles/globals.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -97,36 +98,6 @@ const SignUp = () => {
                   Facebook
                 </button>
               </div>
-            </div>
-          </div>
-
-          {/* New Box 1 (Top) */}
-          <div className="flex flex-col">
-            <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-64 ml-20">
-              <h2 className="text-white text-2xl font-semibold mb-4">
-                Top Box
-              </h2>
-              {/* Add your content or images here */}
-              <img
-                src="your-image-url-here"
-                alt="Description"
-                className="mb-4"
-              />
-              <p className="text-gray-400">Some additional information.</p>
-            </div>
-
-            {/* New Box 2 (Bottom) */}
-            <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-64 mt-20 ml-20">
-              <h2 className="text-white text-2xl font-semibold mb-4">
-                Bottom Box
-              </h2>
-              {/* Add your content or images here */}
-              <img
-                src="your-image-url-here"
-                alt="Description"
-                className="mb-4"
-              />
-              <p className="text-gray-400">Some more information.</p>
             </div>
           </div>
         </div>

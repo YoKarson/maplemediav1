@@ -53,6 +53,17 @@ const YourPosts = () => {
     router.push(`/comments/${postId}`);
   };
 
+  const formatDescription = (description) => {
+    const words = description.split(" ");
+    const formattedDescription = [];
+
+    for (let i = 0; i < words.length; i += 15) {
+      formattedDescription.push(words.slice(i, i + 15).join(" "));
+    }
+
+    return formattedDescription;
+  };
+
   return (
     <div className="flex flex-col items-center justify-center feed p-4 w-screen">
       {posts.length === 0 ? (
@@ -64,7 +75,14 @@ const YourPosts = () => {
             className="mt-40 flex flex-col items-center min-h-64 min-w-1/2 post mb-4 bg-gray-800 p-4 rounded-lg"
           >
             <p className="font-serif text-white text-6xl">{post.title}</p>
-            <p className="font-serif text-white text-3x1">{post.description}</p>
+            <p className="font-serif text-white text-3x1">
+              {formatDescription(post.description).map((line, index) => (
+                <span key={index}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </p>
 
             {post.imageUrl && (
               <img
@@ -74,16 +92,28 @@ const YourPosts = () => {
               />
             )}
             {/* Display likes and dislikes count */}
-            <div className="text-white mt-2">
-              <p>
-                <Image
-                  src="/images/thumb-up.png"
-                  alt=""
-                  width={200}
-                  height={200}
-                />
-                : {post.likes || 0} 👎: {post.dislikes || 0}
-              </p>
+            <div className="flex flex-row space-between space-x-4 text-white mt-2">
+              <Image
+                src="/images/SuperAmyyLove_sticker.png"
+                alt="Thumbs Up"
+                width={40}
+                height={40}
+              />
+              {post.likes || 0}
+              <Image
+                src="/images/SuperAmyy_Reee320.png"
+                alt="Thumbs Down"
+                width={40}
+                height={40}
+              />{" "}
+              {post.dislikes || 0}
+              <Image
+                src="/images/Comments.png"
+                alt="Thumbs Up"
+                width={40}
+                height={40}
+              />
+              {post.comments || 0}
             </div>
 
             <div className="flex space-x-4 mt-2">

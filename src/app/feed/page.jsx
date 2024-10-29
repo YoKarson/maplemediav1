@@ -144,6 +144,17 @@ const Feed = () => {
     router.push(`/comments/${postId}`);
   };
 
+  const formatDescription = (description) => {
+    const words = description.split(" ");
+    const formattedDescription = [];
+
+    for (let i = 0; i < words.length; i += 15) {
+      formattedDescription.push(words.slice(i, i + 15).join(" "));
+    }
+
+    return formattedDescription;
+  };
+
   return (
     <div className="flex flex-col items-center justify-center feed p-4 w-screen">
       {posts.map((post) => (
@@ -158,7 +169,15 @@ const Feed = () => {
 
           {/* Post Title and Description */}
           <p className="font-serif text-white text-6xl">{post.title}</p>
-          <p className="font-serif text-white text-3x1">{post.description}</p>
+
+          <p className="font-serif text-white text-3x1">
+            {formatDescription(post.description).map((line, index) => (
+              <span key={index}>
+                {line}
+                <br />
+              </span>
+            ))}
+          </p>
 
           {post.imageUrl && (
             <img
@@ -205,7 +224,7 @@ const Feed = () => {
               >
                 <Image
                   src="/images/SuperAmyy_Reee320.png"
-                  alt="Thumbs Up"
+                  alt="Thumbs Down"
                   width={40}
                   height={40}
                 />

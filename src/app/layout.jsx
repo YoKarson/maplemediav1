@@ -25,7 +25,7 @@ const RootLayout = ({ children }) => {
             <button className="text-2xl font-bold text-white">Amygos</button>
           </Link>
 
-          <h1>Amy live tracker goes here</h1>
+          <h1>Amy live tracker (coming soon)</h1>
           {/* Search Bar */}
           <div className="w-1/3 mr-60">
             <input
@@ -58,7 +58,12 @@ const RootLayout = ({ children }) => {
                     className="cursor-pointer text-white"
                     onClick={toggleDropdown}
                   >
-                    Profile Icon
+                    <Image
+                      src="/images/user.png"
+                      alt="Thumbs Up"
+                      width={40}
+                      height={40}
+                    />
                   </div>
 
                   {dropdownOpen && (
@@ -138,9 +143,11 @@ const RootLayout = ({ children }) => {
                 </button>
               </li>
               <li>
-                <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
-                  Join The Discord
-                </button>
+                <Link href="https://discord.gg/VrsNkMTr">
+                  <button className="text-white text-lg font-semibold hover:bg-gray-700 p-3 rounded w-full text-left">
+                    Join The Discord
+                  </button>
+                </Link>
               </li>
             </ul>
           </nav>
