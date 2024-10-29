@@ -239,8 +239,8 @@ const Feed = () => {
                 {" "}
                 {/* Add flex and space between */}
                 <Image
-                  src="/images/Comments.png"
-                  alt="Thumbs Up"
+                  src="/images/comments.png"
+                  alt="comments"
                   width={40}
                   height={40}
                 />
