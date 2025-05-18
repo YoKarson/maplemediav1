@@ -2,6 +2,16 @@
 
 A modern social media platform built for the Twitch streamer SuperAmyy and her community. This platform allows users to share posts, interact through likes/dislikes, and engage in discussions through comments.
 
+## Demo Access
+
+For demonstration purposes, you can use the following guest credentials:
+- Email: guest@gmail.com
+- Password: guest123
+
+## Live Demo
+
+Visit the deployed application: [Amygos](https://master.d806as31t2m39.amplifyapp.com/)
+
 ## Features
 
 - 🔐 User Authentication
@@ -32,16 +42,6 @@ A modern social media platform built for the Twitch streamer SuperAmyy and her c
   - Storage
 - **Deployment**: AWS Amplify
 
-
-## Demo Access
-
-For demonstration purposes, you can use the following guest credentials:
-- Email: guest@gmail.com
-- Password: guest123
-
-## Live Demo
-
-Visit the deployed application: [Amygos](https://master.d806as31t2m39.amplifyapp.com/)
 
 ## Contributing
 
